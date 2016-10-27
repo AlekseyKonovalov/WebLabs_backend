@@ -28,7 +28,6 @@ class pokemonController extends Controller
         parse_str(file_get_contents("php://input"),$_put);
 
         if(isset($_put['id']) && isset($_put['name']) && isset($_put['image']) && isset($_put['power']) && isset($_put['speed'])) {
-            unset($_put['controller']);
             $changeItem = $this->model->save($_put);
             $this->setResponce($changeItem);
         }

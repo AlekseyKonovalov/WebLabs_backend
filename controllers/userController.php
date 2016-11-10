@@ -22,13 +22,11 @@ class userController extends Controller
     }
 
 
-    public function edit()
-    {
-        $_put = array();
-        parse_str(file_get_contents("php://input"),$_put);
-
-        if(isset($_put['id']) && isset($_put['name']) && isset($_put['score'])) {
-            $changeItem = $this->model->save($_put);
+    public function edit($data){
+        $_put = json_decode(file_get_contents('php://input'), true);
+        if(isset($_put['id']) && isset($_put['name']) && isset($_put['score'] )){
+            $dataToSave=array('id'=>$_put['id'], 'name' => $_put['name'],'score' => $_put['score']);
+            $changeItem = $this->model->save($dataToSave, $data['id']);
             $this->setResponce($changeItem);
         }
     }

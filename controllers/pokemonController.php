@@ -22,13 +22,11 @@ class pokemonController extends Controller
         }
     }
 
-    public function edit()
-    {
-        $_put = array();
-        parse_str(file_get_contents("php://input"),$_put);
-
+    public function edit($data){
+        $_put = json_decode(file_get_contents('php://input'), true);
         if(isset($_put['id']) && isset($_put['name']) && isset($_put['image']) && isset($_put['power']) && isset($_put['speed'])) {
-            $changeItem = $this->model->save($_put);
+            $dataToSave=array('id'=>$_put['id'], 'name' => $_put['name'],'image' => $_put['image'],'power' => $_put['power'],'speed' => $_put['speed']);
+            $changeItem = $this->model->save($dataToSave, $data['id']);
             $this->setResponce($changeItem);
         }
     }

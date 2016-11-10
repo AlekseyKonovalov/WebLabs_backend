@@ -26,31 +26,29 @@ class Model{
     }
 
     public function create(array $item){
-
-        // считываем нашу "базу данных"
         $data=file_get_contents($this->dataFileName);
-        // декодируем
         $data=json_decode($data, true);
-        // добавляем элемент
-       // array_push($data, $item);
         $data[]=$item;
-        // сохраняем файл, и возврfщаем результат сохранения (успех или провал)
         return file_put_contents($this->dataFileName, json_encode($data));
     }
 
-    //метод save с репозитория адгама
-    public function save($changeStr){
-        $data=file_get_contents($this->dataFileName);
-        $data=json_decode($data, true);
-        $data[$changeStr['id']] = $changeStr;
-        return file_put_contents($this->dataFileName, json_encode($data, true));
+
+    public function save(array $item, $id){
+        $data = file_get_contents($this->dataFileName);
+        $data = json_decode($data, true);
+        if(array_key_exists($id, $data)) {
+            $data[$id] = $item;
+        }
+        return file_put_contents($this->dataFileName, json_encode($data));
     }
 
 
     public function delete($id){
         $data = file_get_contents($this->dataFileName);
         $data = json_decode($data, true);
-        unset($data[$id]);
+        if(array_key_exists($id, $data)){
+            unset($data[$id]);
+        }
         return file_put_contents($this->dataFileName, json_encode($data));
     }
 }

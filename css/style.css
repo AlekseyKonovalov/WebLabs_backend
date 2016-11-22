@@ -83,8 +83,6 @@ div.startButton a:hover {
     color:#fff;
 }
 
-
-
 div.startButton {
     background: #00c3ff;
     clear:left;
@@ -134,8 +132,6 @@ ul.toplist li {
 
 .logohead {text-align:center;}
 
-
-
 div.score{
     font-size:25px;
     float:left;
@@ -183,16 +179,11 @@ div.time a{
     position: relative;
     width: 100%;
     height: 62%;
-    background: #cce5ff;
-    opacity: 0.85;
+    background: rgba(204,229,255, 0.8);
     margin-top:16%;
 }
 .pok{
     position: relative;
-    width: 3em;
-    height: 3em;
-    background: yellow;
-    border-radius: 2em;
 }
 
 

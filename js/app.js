@@ -37,12 +37,6 @@ app.config(function($routeProvider) {
         }
     })
 
-    .controller ("gameController", function($scope){
-        $scope.startGame=function () {
-            $location.path='startGame'
-        }
-    })
-
     .directive("pokemon", function(){
         return {
             templateUrl:"assets/directives/pokemon.html",

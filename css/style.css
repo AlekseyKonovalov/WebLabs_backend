@@ -1,3 +1,8 @@
+html{
+    padding:0;
+    margin:0;
+}
+
 div.centeredmenu {
     float:left;
     width:100%;
@@ -136,7 +141,8 @@ div.score{
     float:left;
     display:block;
     background: #00c3ff;
-    margin-top:2%;
+    margin-top:1%;
+    margin-left:4%;
 }
 
 div.score a{
@@ -148,7 +154,8 @@ div.level{
     float:right;
     display:block;
     background: #00c3ff;
-    margin-top:2%;
+    margin-top:1%;
+    margin-right: 4%;
 }
 
 div.time{
@@ -156,7 +163,7 @@ div.time{
     float:left;
     display:block;
     background: #00c3ff;
-    margin-top:2%;
+    margin-top:1%;
     margin-left:45%;
 
 }
@@ -164,6 +171,29 @@ div.time a{
     text-align:center;
 }
 
+.main{
+    width: 95%;
+    margin: 0 auto;
+    padding: 1em;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.26);
+}
+
+.pole{
+    position: relative;
+    width: 100%;
+    height: 62%;
+    background: #cce5ff;
+    opacity: 0.85;
+    margin-top:16%;
+}
+.pok{
+    position: relative;
+    width: 3em;
+    height: 3em;
+    background: yellow;
+    border-radius: 2em;
+}
 
 
 

@@ -1,0 +1,9 @@
+	<div class="centeredmenu"  ng-controller="menuController" >
+		<div class="logohead">
+		<a href="#start"> <img src="images/headlogo.jpg"> </a>
+		</div>
+		
+		<div class="menuItem" ng-repeat="item in menuItems">					
+				<a href="{{item.link}}">{{item.name}}</a>			
+		</div>		
+	</div>

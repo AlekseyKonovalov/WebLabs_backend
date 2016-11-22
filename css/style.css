@@ -1,0 +1,172 @@
+div.centeredmenu {
+    float:left;
+    width:100%;
+    overflow:hidden;
+    position:relative;
+    font-size:25px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+div.menuItem{
+    background: #00c3ff;
+    text-align:center;
+}
+
+div.centeredmenu ul {
+    clear:left;
+    float:left;
+    list-style:none;
+    margin:0;
+    padding:0;
+    position:relative;
+    left:50%;
+    text-align:center;
+}
+
+div.centeredmenu ul li {
+    display:block;
+    float:left;
+    list-style:none;
+    margin:0;
+    padding:0;
+    position:relative;
+    right:50%;
+}
+
+
+div.centeredmenu ul li a {
+    display:block;
+    margin:0 0 0 1px;
+    padding:3px 10px;
+    color:#000;
+    text-decoration:none;
+    line-height:2em;
+}
+
+a.label {
+    right: 50px;
+}
+
+div.centeredmenu ul li a:hover {
+    background: #2d79ff;
+    color:#fff;
+}
+
+div.centeredmenu ul li a.active, div.centeredmenu ul li a.active:hover {
+    color:#fff;
+    background: #2d79ff;
+    font-weight:bold;
+}
+
+
+body {
+    background-image: url("../images/back.png");
+}
+
+
+div.startButton a {
+    display:block;
+    margin:0 0 0 0px;
+    padding:20px 20px;
+    color:#000;
+    text-decoration:none;
+    line-height:2em;
+
+}
+
+div.startButton a:hover {
+    background: #2d79ff;
+    color:#fff;
+}
+
+
+
+div.startButton {
+    background: #00c3ff;
+    clear:left;
+    float:left;
+    list-style:none;
+    margin:14% 0 0 0;
+    padding:0%;
+    position:relative;
+    left:50%;
+    text-align:center;
+
+    border: solid;
+    border-color:  #2d79ff;
+    font-size:30px;
+
+}
+
+div.textAbout{
+    background-color: rgba(255, 255, 201, 0.8);
+    font-size:20px;
+    font-family: Comic Sans, Comic Sans MS, cursive;
+}
+
+div.textAbout{
+    color: #0009ff;
+}
+
+div.textAbout p.image1{
+    margin:0 0 0 40%;
+}
+
+ul.toplist {
+    background-color: rgba(255, 255, 201, 0.8);
+    padding: 30px;
+    font-size:20px;
+
+}
+
+ul.toplist li {
+    list-style-type: decimal;
+    list-style-position: inside;
+    left:50%;
+    text-align:center;
+    background: #cce5ff;
+    margin: 5px;
+}
+
+.logohead {text-align:center;}
+
+
+
+div.score{
+    font-size:25px;
+    float:left;
+    display:block;
+    background: #00c3ff;
+    margin-top:2%;
+}
+
+div.score a{
+    text-align:center;
+}
+
+div.level{
+    font-size:25px;
+    float:right;
+    display:block;
+    background: #00c3ff;
+    margin-top:2%;
+}
+
+div.time{
+    font-size:25px;
+    float:left;
+    display:block;
+    background: #00c3ff;
+    margin-top:2%;
+    margin-left:45%;
+
+}
+div.time a{
+    text-align:center;
+}
+
+
+
+
+
+
+

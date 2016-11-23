@@ -98,7 +98,7 @@ app.config(function($routeProvider) {
         $scope.score=scoreFac.getScore();
         $scope.level=levelFac.getLevel();
         $scope.time=0;
-        $scope.nameUser="noname";
+        var nameUser="noname";
 
         var tictac=$interval(function(){
 
@@ -138,9 +138,10 @@ app.config(function($routeProvider) {
             }
         }
 
-        $scope.sendResult=(function (temp) {
-            var ttt=temp;
-            console.log(ttt);
+        $scope.sendResult=(function () {
+            nameUser= $scope.innn.username.$modelValue;
+            console.log(nameUser);
+            
         })
     })
 

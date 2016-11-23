@@ -15,6 +15,9 @@ app.config(function($routeProvider) {
     $routeProvider.when('/startGame', {
         templateUrl: 'assets/startGame.html'
     })
+    $routeProvider.when('/endGame', {
+        templateUrl: 'assets/endGame.html'
+    })
     $routeProvider.otherwise({
             redirectTo: '/'
         });
@@ -42,7 +45,7 @@ app.config(function($routeProvider) {
             templateUrl:"assets/directives/pokemon.html",
             replace: true,
             restrict: 'E',
-            controller:  function($scope, $interval, scoreFac, levelFac){
+            controller:  function($scope, $interval, scoreFac, levelFac,  $location){
                 $scope.pokPos={'X':5,'Y':1};
                 $scope.pokWidth=250;
                 $scope.pokheight=180;
@@ -51,8 +54,9 @@ app.config(function($routeProvider) {
                 $scope.levelUp=(function () {
                     var temp=levelFac.getLevel()+1;
                     levelFac.setLevel(temp);
-                    temp=scoreFac.getScore()+2000;
+                    temp=scoreFac.getScore()+(60-tic)*10;
                     scoreFac.setScore(temp);
+                    tic=0;
                 })
 
 
@@ -74,7 +78,17 @@ app.config(function($routeProvider) {
                         $scope.pokWidth=100;
                         $scope.pokheight=60;
                     }
+                    if (levelFac.getLevel()==4 || scoreFac.getScore()<20) {
+                        stop();
+                        $location.path("/endGame");
+
+                    }
+
                 }, 50);
+
+                var stop=function(){
+                    $interval.cancel(tictac);
+                };
 
             }
         }
@@ -84,11 +98,15 @@ app.config(function($routeProvider) {
         $scope.score=scoreFac.getScore();
         $scope.level=levelFac.getLevel();
         $scope.time=0;
+        $scope.nameUser="noname";
 
         var tictac=$interval(function(){
 
-            $scope.time++
+            if($scope.level<levelFac.getLevel()){
+                $scope.time=0;
+            }
 
+            $scope.time++
 
             $scope.score=scoreFac.getScore();
 
@@ -96,11 +114,39 @@ app.config(function($routeProvider) {
 
             $scope.level=levelFac.getLevel();
 
+            if(levelFac.getLevel()==4 || scoreFac.getScore()<20){
+                endTextF();
+                stop();
+            }
+
 
         },300);
 
+        var stop=function(){
+            $interval.cancel(tictac);
+        };
 
+        var endTextF=function () {
+            if(scoreFac.getScore()<1500 && scoreFac.getScore()>500){
+                $scope.endText="Not bad"
+            }
+            if(scoreFac.getScore()>1500){
+                $scope.endText="Very good"
+            }
+            if(scoreFac.getScore()<500){
+                $scope.endText="Very bad. Try again"
+            }
+        }
+
+        $scope.sendResult=(function (temp) {
+            var ttt=temp;
+            console.log(ttt);
+        })
     })
+
+
+
+
 
     .factory("scoreFac", function() {
         var score = 1000;

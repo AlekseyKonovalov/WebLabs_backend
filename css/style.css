@@ -186,6 +186,11 @@ div.time a{
     position: relative;
 }
 
+div.endGame {
+    background: rgba(204,229,255, 0.8);
+    font-size: 30px;
+}
+
 
 
 

@@ -42,20 +42,39 @@ app.config(function($routeProvider) {
             templateUrl:"assets/directives/pokemon.html",
             replace: true,
             restrict: 'E',
-            controller:  function($scope, $interval){
+            controller:  function($scope, $interval, scoreFac, levelFac){
                 $scope.pokPos={'X':5,'Y':1};
                 $scope.pokWidth=250;
                 $scope.pokheight=180;
-
                 var tictac, tic=0;
-                tictac=$interval(function(){
+
+                $scope.levelUp=(function () {
+                    var temp=levelFac.getLevel()+1;
+                    levelFac.setLevel(temp);
+                    temp=scoreFac.getScore()+2000;
+                    scoreFac.setScore(temp);
+                })
+
+
+                tictac = $interval(function () {
                     tic++;
-                    $scope.pokPos.X=50*Math.sin(tic/50);
-                    $scope.pokPos.Y=30*Math.cos(tic/40);
-
-                },50);
-
-
+                    if (levelFac.getLevel()==1) {
+                        $scope.pokPos.X = 50 * Math.sin(tic / 50);
+                        $scope.pokPos.Y = 30 * Math.cos(tic / 40);
+                    }
+                    if (levelFac.getLevel()==2) {
+                        $scope.pokPos.X = 50 * Math.sin(tic / 50);
+                        $scope.pokPos.Y = 30 * Math.cos(tic / 40);
+                        $scope.pokWidth=150;
+                        $scope.pokheight=100;
+                    }
+                    if (levelFac.getLevel()==3) {
+                        $scope.pokPos.X = 50 * Math.sin(tic / 50);
+                        $scope.pokPos.Y = 30 * Math.cos(tic / 40);
+                        $scope.pokWidth=100;
+                        $scope.pokheight=60;
+                    }
+                }, 50);
 
             }
         }
@@ -70,9 +89,13 @@ app.config(function($routeProvider) {
 
             $scope.time++
 
-            scoreFac.setScore($scope.score-10);
 
             $scope.score=scoreFac.getScore();
+
+            scoreFac.setScore(scoreFac.getScore()-10);
+
+            $scope.level=levelFac.getLevel();
+
 
         },300);
 
@@ -89,13 +112,13 @@ app.config(function($routeProvider) {
         };
         return {
             getScore: getScore,
-            setScore:setScore
+            setScore: setScore
         };
     })
 
 
     .factory("levelFac", function() {
-        var level = 2;
+        var level = 1;
         function setLevel(value) {
             level=value;
         };
@@ -107,6 +130,7 @@ app.config(function($routeProvider) {
             setLevel: setLevel
         };
     })
+
 
 ;
 

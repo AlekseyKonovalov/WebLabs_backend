@@ -15,7 +15,7 @@
 				<span ng-show="reverse && order=='name'">&uarr;</span>
 				<span ng-show="!reverse && order=='name'">&darr;</span></td>
 			
-			<td class="table__header" ng-class="{'table__header-active':order=='age'}" ng-click="order='age';reverse=!reverse">age <span ng-show="reverse && order=='age'">&uarr;</span><span ng-show="!reverse && order=='age'">&darr;</span></td>
+			<td class="table__header" ng-class="{'table__header-active':order=='score'}" ng-click="order='score';reverse=!reverse">score <span ng-show="reverse && order=='score'">&uarr;</span><span ng-show="!reverse && order=='score'">&darr;</span></td>
 		</tr>
 		<tr ng-repeat="item in users | orderBy:order:reverse">
 		

@@ -95,6 +95,16 @@ app.config(function($routeProvider) {
                     $interval.cancel(tictac);
                 };
 
+                var resetValues=function(){
+                    tic=0;
+                    i=1;
+                    $scope.power = pokemons[0].power;
+                    $scope.speed= pokemons[0].speed;
+                    $scope.imagePok = pokemons[0].image;
+                    $scope.gamePok();
+
+                };
+
 
                 var levelPok=function(){
                     if(levelFac.getLevel()<4){
@@ -102,8 +112,7 @@ app.config(function($routeProvider) {
                         $scope.power = pokemons[i].power;
                         $scope.speed= pokemons[i].speed;
                         $scope.imagePok = pokemons[i].image;
-                        $scope.pokPos.X=30;
-                        $scope.pokPos.Y=40;
+
                         i++;
 
                         $scope.pokWidth= $scope.pokWidth/2;
@@ -166,12 +175,14 @@ app.config(function($routeProvider) {
             nameUser= $scope.innn.username.$modelValue;
 
 
-            $http.post("/?controller=user", {"id":"22","name":nameUser,"score":scoreFac.getScore() })
+            $http.post("/?controller=user", {"id":0,"name":nameUser,"score":scoreFac.getScore() })
                 .success(function () {
                     console.log('ok.send.');
+                    scoreFac.setScore(1000);
+                    levelFac.setLevel(1);
                     $location.path('/start');
                 })
-                .error(function (err) {
+                .error(function () {
                     console.log('Не было отправки');
                 })
             ;

@@ -23,6 +23,15 @@ app.config(function($routeProvider) {
         });
     })
 
+    .controller("toplistController", function ($scope, $http) {
+        $scope.users;
+        $http.get("?controller=user").success(function (data) {
+            $scope.users = data;
+            console.log($scope.users);
+
+        });
+    })
+
     .controller("menuController", function ($scope) {
         $scope.menuItems= [
             {name:'start', link:'#start'},
@@ -65,17 +74,19 @@ app.config(function($routeProvider) {
                 $scope.levelUp=(function () {
                     var temp=levelFac.getLevel()+1;
                     levelFac.setLevel(temp);
-                    temp=scoreFac.getScore()+(60-tic)* parseInt($scope.power);
+                    temp=scoreFac.getScore()+(60-tic/100)* parseInt($scope.power);
                     scoreFac.setScore(temp);
                     tic=0;
                     levelPok();
                 })
+                var i=1;
 
                 $scope.gamePok=function () {
                     tictac = $interval(function () {
                         tic++;
-                        $scope.pokPos.X = 50 * Math.sin(tic / 50);
-                        $scope.pokPos.Y = 30 * Math.cos(tic / 40);
+                        $scope.pokPos.X = 50 * Math.sin(tic / (50/i)) ;
+                        $scope.pokPos.Y = 30 * Math.cos(tic / (40/i)) ;
+
 
                     }, 50);
                 }
@@ -84,14 +95,15 @@ app.config(function($routeProvider) {
                     $interval.cancel(tictac);
                 };
 
-                var i=1;
+
                 var levelPok=function(){
                     if(levelFac.getLevel()<4){
 
                         $scope.power = pokemons[i].power;
                         $scope.speed= pokemons[i].speed;
                         $scope.imagePok = pokemons[i].image;
-                        console.log($scope.imagePok);
+                        $scope.pokPos.X=30;
+                        $scope.pokPos.Y=40;
                         i++;
 
                         $scope.pokWidth= $scope.pokWidth/2;
@@ -102,7 +114,6 @@ app.config(function($routeProvider) {
                         $location.path("/endGame");
                     }
                 };
-
             }
         }
     })
@@ -140,13 +151,13 @@ app.config(function($routeProvider) {
         };
 
         var endTextF=function () {
-            if(scoreFac.getScore()<1500 && scoreFac.getScore()>500){
+            if(scoreFac.getScore()<4500 && scoreFac.getScore()>2500){
                 $scope.endText="Not bad"
             }
-            if(scoreFac.getScore()>1500){
+            if(scoreFac.getScore()>4500){
                 $scope.endText="Very good"
             }
-            if(scoreFac.getScore()<500){
+            if(scoreFac.getScore()<2500){
                 $scope.endText="Very bad. Try again"
             }
         };

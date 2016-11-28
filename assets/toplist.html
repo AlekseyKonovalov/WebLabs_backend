@@ -1,18 +1,29 @@
  
 
-<ul class="toplist">
+<div class="toplist" ng-controller="toplistController">
+ 
+<table class="table" ng-init="order='id'">
+		<tr>
+			<td class="table__header" 
+				ng-class="{'table__header-active':order=='id'}" 
+				ng-click="order='id';reverse=!reverse">id <span ng-show="reverse && order=='id'">&uarr;</span><span ng-show="!reverse  && order=='id'">&darr;</span></td>
+			
+			<td class="table__header" 
+				ng-class="{'table__header-active':order=='name'}" 
+				ng-click="order='name';reverse=!reverse">
+				name 
+				<span ng-show="reverse && order=='name'">&uarr;</span>
+				<span ng-show="!reverse && order=='name'">&darr;</span></td>
+			
+			<td class="table__header" ng-class="{'table__header-active':order=='age'}" ng-click="order='age';reverse=!reverse">age <span ng-show="reverse && order=='age'">&uarr;</span><span ng-show="!reverse && order=='age'">&darr;</span></td>
+		</tr>
+		<tr ng-repeat="item in users | orderBy:order:reverse">
+		
+			<td>{{item.id}}</td>
+			<td>{{item.name}}</td>
+			<td>{{item.score}}</td>
+		</tr>
+</table>
+ 
 
-    <li> Michael </li>
-    <li> Joshua </li>
-    <li> Matthew</li>
-    <li> Michael </li>
-    <li> Joshua </li>
-    <li> Matthew</li>
-    <li> Michael </li>
-    <li> Joshua </li>
-    <li> Matthew</li>
-    <li> Michael </li>
-    <li> Joshua </li>
-    <li> Matthew</li>
-
-</ul>
+</div>

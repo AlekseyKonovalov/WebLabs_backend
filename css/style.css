@@ -191,7 +191,24 @@ div.endGame {
     font-size: 30px;
 }
 
+.table{
+    font-size:25px;
+    width: 60%;
+    margin: 0 auto;
+    border: 5px solid rgba(128, 128, 128, 1);
+    background: #00c3ff;
 
+}
+.table__header{
+    font-weight: 400;
+    width: 20%;
+    color:blue;
+    cursor: pointer;
+    background: #fff;
+}
+.table__header-active{
+    font-weight: 800;
+}
 
 
 

@@ -45,56 +45,69 @@ app.config(function($routeProvider) {
             templateUrl:"assets/directives/pokemon.html",
             replace: true,
             restrict: 'E',
-            controller:  function($scope, $interval, scoreFac, levelFac,  $location){
+
+            controller:  function($scope, $interval, scoreFac, levelFac,  $location, $http){
                 $scope.pokPos={'X':5,'Y':1};
                 $scope.pokWidth=250;
                 $scope.pokheight=180;
+
                 var tictac, tic=0;
+                var pokemons;
+
+                $http.get("?controller=pokemon").success(function (data) {
+                    pokemons = data;
+                    $scope.power = pokemons[0].power;
+                    $scope.speed= pokemons[0].speed;
+                    $scope.imagePok = pokemons[0].image;
+                    $scope.gamePok();
+                });
 
                 $scope.levelUp=(function () {
                     var temp=levelFac.getLevel()+1;
                     levelFac.setLevel(temp);
-                    temp=scoreFac.getScore()+(60-tic)*10;
+                    temp=scoreFac.getScore()+(60-tic)* parseInt($scope.power);
                     scoreFac.setScore(temp);
                     tic=0;
+                    levelPok();
                 })
 
-
-                tictac = $interval(function () {
-                    tic++;
-                    if (levelFac.getLevel()==1) {
+                $scope.gamePok=function () {
+                    tictac = $interval(function () {
+                        tic++;
                         $scope.pokPos.X = 50 * Math.sin(tic / 50);
                         $scope.pokPos.Y = 30 * Math.cos(tic / 40);
-                    }
-                    if (levelFac.getLevel()==2) {
-                        $scope.pokPos.X = 50 * Math.sin(tic / 50);
-                        $scope.pokPos.Y = 30 * Math.cos(tic / 40);
-                        $scope.pokWidth=150;
-                        $scope.pokheight=100;
-                    }
-                    if (levelFac.getLevel()==3) {
-                        $scope.pokPos.X = 50 * Math.sin(tic / 50);
-                        $scope.pokPos.Y = 30 * Math.cos(tic / 40);
-                        $scope.pokWidth=100;
-                        $scope.pokheight=60;
-                    }
-                    if (levelFac.getLevel()==4 || scoreFac.getScore()<20) {
-                        stop();
-                        $location.path("/endGame");
 
-                    }
-
-                }, 50);
+                    }, 50);
+                }
 
                 var stop=function(){
                     $interval.cancel(tictac);
+                };
+
+                var i=1;
+                var levelPok=function(){
+                    if(levelFac.getLevel()<4){
+
+                        $scope.power = pokemons[i].power;
+                        $scope.speed= pokemons[i].speed;
+                        $scope.imagePok = pokemons[i].image;
+                        console.log($scope.imagePok);
+                        i++;
+
+                        $scope.pokWidth= $scope.pokWidth/2;
+                        $scope.pokheight=$scope.pokheight/2;
+                    }
+                    else {
+                        stop();
+                        $location.path("/endGame");
+                    }
                 };
 
             }
         }
     })
 
-    .controller("gameController", function ($scope, $interval, scoreFac, levelFac) {
+    .controller("gameController", function ($scope, $interval, scoreFac, levelFac, $http, $location,  $log) {
         $scope.score=scoreFac.getScore();
         $scope.level=levelFac.getLevel();
         $scope.time=0;
@@ -136,13 +149,22 @@ app.config(function($routeProvider) {
             if(scoreFac.getScore()<500){
                 $scope.endText="Very bad. Try again"
             }
-        }
+        };
 
         $scope.sendResult=(function () {
             nameUser= $scope.innn.username.$modelValue;
-            console.log(nameUser);
-            
-        })
+
+
+            $http.post("/?controller=user", {"id":"22","name":nameUser,"score":scoreFac.getScore() })
+                .success(function () {
+                    console.log('ok.send.');
+                    $location.path('/start');
+                })
+                .error(function (err) {
+                    console.log('Не было отправки');
+                })
+            ;
+        });
     })
 
 

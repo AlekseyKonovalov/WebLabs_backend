@@ -174,12 +174,12 @@ app.config(function($routeProvider) {
         $scope.sendResult=(function () {
             nameUser= $scope.innn.username.$modelValue;
 
-            var user ={'id':0, 'name':nameUser, 'score':scoreFac.getScore()};
+            var user ={'id':"", 'name':nameUser, 'score':scoreFac.getScore()};
             console.log('user :', user);
 
             $http.post("/?controller=user", user)
-                .success(function (response) {
-                    console.log('ok.send.', response);
+                .success(function () {
+                    console.log('ok.send.');
                     scoreFac.setScore(1000);
                     levelFac.setLevel(1);
                     $location.path('/start');
